@@ -47,7 +47,7 @@ export const save = async (req: Request, res: Response): Promise<Response> => {
  * @returns 
  */
 export const login = async (req: Request, res: Response): Promise<Response> => {
-    const user = await User.findOne({username: req.body.username}).populate('roles');
+    const user = await User.findOne({username: req.body.username});
     if(!user){
         return res.status(404).json({message: 'Error, el usuario no existe.'})
     }
