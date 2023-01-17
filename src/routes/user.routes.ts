@@ -3,7 +3,7 @@ import { Router } from "express";
 const router = Router();
 
 import {profile, updateProfile, changePassword} from '../controllers/user.controller';
-import {TokenValidation} from '../middlewares/verifyToken';
+import {TokenValidation, checkValidationUser} from '../middlewares/verifyToken';
 import { updateProfileRequest, changePasswordRequest } from "../request/userRequest";
 
 /**
