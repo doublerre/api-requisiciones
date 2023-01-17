@@ -4,7 +4,7 @@ const router = Router();
 
 import {profile, updateProfile, changePassword} from '../controllers/user.controller';
 import {TokenValidation, checkValidationUser} from '../middlewares/verifyToken';
-import { updateProfileRequest, changePasswordRequest } from "../request/userRequest";
+import { updateProfileRequest, changePasswordRequest } from "../requests/userRequest";
 
 /**
  * *Listado de rutas para el modelo de User.
