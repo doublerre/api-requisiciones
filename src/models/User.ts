@@ -21,7 +21,7 @@ const UserSchema: Schema<IUser> = new Schema({
     nombre: {type: String, required: true},
     username: { type: String, unique: true, required: true },
     password: String,
-    activo: String,
+    activo: Boolean,
     rol: {type: String, enum: ['admin', 'r_presupuesto', 'r_proveedor', 'solicitante']},
 }, {timestamps: true});
 

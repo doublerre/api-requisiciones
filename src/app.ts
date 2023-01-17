@@ -4,6 +4,8 @@ import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 
+import authRoutes from "./routes/auth.routes";
+
 const app = express();
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -29,5 +31,7 @@ app.get('/', (req, res) => {
         documentacion: 'Pendiente.'
     });
 });
+
+app.use('/api', authRoutes);
 
 export default app;
