@@ -5,6 +5,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 
 import authRoutes from "./routes/auth.routes";
+import requiRoutes from "./routes/requi.routes";
 
 const app = express();
 const limiter = rateLimit({
@@ -33,5 +34,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', authRoutes);
+app.use('/api', requiRoutes);
 
 export default app;
