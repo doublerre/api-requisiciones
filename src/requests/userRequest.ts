@@ -37,15 +37,6 @@ export const updateProfileRequest = async (req: Request, res: Response, next: Ne
             'string.empty': `El campo username no debe estar vacio.`,
             'string.min': `El username debe de ser de al menos {#limit} caracter.`,
         }),
-        email: Joi.string().email().optional().messages({
-            'string.base': `El campo email debe ser una cadena de texto.'`,
-            'string.empty': `El campo email no debe estar vacio.`,
-            'string.email': `Debes introducir un email valido.`,
-        }),
-        acerca_de: Joi.string().optional().messages({
-            'string.base': `El campo acerca de debe ser una cadena de texto.'`,
-            'string.empty': `El campo acerca de no debe estar vacio.`,
-        }),
     });
     validateRequest(req, res, next, schema);
 }
