@@ -1,7 +1,9 @@
 import {model, Schema, Document, ObjectId} from 'mongoose';
+import { verifyContent } from "../libs/fileSystem";
 
 export interface IRequi extends Document{
     solicita: string,
+    folio: string,
     archivo: string,
     prioridad: string,
     comentarios: [{
@@ -23,7 +25,8 @@ export interface IRequi extends Document{
 
 const RequiSchema: Schema<IRequi> = new Schema({
     solicita: {type: String, required: true},
-    archivo: {type: String, required: true},
+    folio: String,
+    archivo: String,
     prioridad: {type: String, required: true, enum: ['Baja', 'Media', 'Alta'], default: 'Baja'},
     comentarios: [{
         comentario: String,
@@ -35,17 +38,26 @@ const RequiSchema: Schema<IRequi> = new Schema({
     requisicion: [{
         cantidad: {type: String, required: true},
         unidad: {type: String, required: true},
-        descripcion: {type: Text, required: true},
+        descripcion: {type: String, required: true},
         administracion: String,
     }],
-    solicitante: [{
+    solicitante: {
         validacion: {type: String, required: true},
-        user: [{
+        user: {
             ref: 'User',
             type: Schema.Types.ObjectId
-        }],
-    }],
-    estatus: {type: String, required: true, enum: ['Borrador', 'Revisión', 'Aprobado', 'Rechazado']}
+        },
+    },
+    estatus: {type: String, required: true, enum: ['Borrador', 'Revisión', 'Aprobado', 'Rechazado'], default: "Borrador"}
 }, {timestamps: true});
+
+RequiSchema.pre<IRequi>('save', async function(next) {
+    const requi = this;
+    const date = new Date();
+    const folio = "RS-" + date.getFullYear();
+    verifyContent(date.getFullYear());
+
+    next();
+});
 
 export default model<IRequi>('Requi', RequiSchema);
