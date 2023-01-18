@@ -5,7 +5,12 @@ import Requi from "../models/Requi";
 export const save = async(req: Request, res: Response): Promise<Response> => {
     const newRequi = new Requi(req.body);
 
-    await newRequi.save();
+    try {
+        await newRequi.save();
+    } catch (error) {
+        console.log(error);
+    }
+    
 
     return res.status(201).json({message: '', data: newRequi})
 }

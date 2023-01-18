@@ -1,5 +1,5 @@
 import {model, Schema, Document, ObjectId} from 'mongoose';
-import { verifyContent } from "../libs/fileSystem";
+import { verifyContent, readTxtFile, writeTxtFile } from "../libs/fileSystem";
 
 export interface IRequi extends Document{
     solicita: string,
@@ -54,9 +54,12 @@ const RequiSchema: Schema<IRequi> = new Schema({
 RequiSchema.pre<IRequi>('save', async function(next) {
     const requi = this;
     const date = new Date();
-    const folio = "RS-" + date.getFullYear();
     verifyContent(date.getFullYear());
-
+    const id = await readTxtFile(date.getFullYear());
+    const new_id = id.padStart(4, "0");
+    const folio = "RS-" + date.getFullYear() + "-" + new_id;
+    requi.folio = folio;
+    writeTxtFile(id, date.getFullYear());
     next();
 });
 

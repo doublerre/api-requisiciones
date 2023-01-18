@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, writeFile } from 'fs'
+import { existsSync, mkdirSync, writeFileSync, writeFile, readFileSync } from 'fs'
 import path from 'path';
 
 export const verifyContent = (year: Number) => {
@@ -18,4 +18,17 @@ export const verifyContent = (year: Number) => {
         });
         return true;
     }
+}
+
+export const readTxtFile = async (year: Number) => {
+    const file_path = path.resolve("build/folio/" + year + ".txt");
+    const data = readFileSync(file_path, 'utf-8');
+    return data;
+}
+
+export const writeTxtFile = (id: string, year: Number) => {
+    let id_int = parseInt(id);
+    id_int = id_int + 1;
+    const file_path = path.resolve("build/folio/" + year + ".txt");
+    writeFileSync(file_path, id_int.toString(), "utf-8");
 }
