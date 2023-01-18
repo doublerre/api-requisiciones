@@ -57,7 +57,7 @@ RequiSchema.pre<IRequi>('save', async function(next) {
     verifyContent(date.getFullYear());
     const id = await readTxtFile(date.getFullYear());
     const new_id = id.padStart(4, "0");
-    const folio = "RS-" + date.getFullYear() + "-" + new_id;
+    const folio = "RQ-" + date.getFullYear() + "-" + new_id;
     requi.folio = folio;
     writeTxtFile(id, date.getFullYear());
     next();
