@@ -1,5 +1,6 @@
 import {model, Schema, Document, ObjectId} from 'mongoose';
 import { verifyContent, readTxtFile, writeTxtFile } from "../libs/fileSystem";
+import { v4 } from "uuid";
 
 export interface IRequi extends Document{
     solicita: string,
@@ -16,10 +17,10 @@ export interface IRequi extends Document{
         descripcion: string,
         administracion: string,
     }],
-    solicitante: [{
+    solicitante: {
         validacion: string,
         user: Array<ObjectId>
-    }],
+    },
     estatus: string
 }
 
@@ -42,7 +43,7 @@ const RequiSchema: Schema<IRequi> = new Schema({
         administracion: String,
     }],
     solicitante: {
-        validacion: {type: String, required: true},
+        validacion: String,
         user: {
             ref: 'User',
             type: Schema.Types.ObjectId
@@ -53,6 +54,7 @@ const RequiSchema: Schema<IRequi> = new Schema({
 
 RequiSchema.pre<IRequi>('save', async function(next) {
     const requi = this;
+    requi.solicitante.validacion = v4();
     const date = new Date();
     verifyContent(date.getFullYear());
     const id = await readTxtFile(date.getFullYear());
