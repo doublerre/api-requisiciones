@@ -54,6 +54,7 @@ const RequiSchema: Schema<IRequi> = new Schema({
 
 RequiSchema.pre<IRequi>('save', async function(next) {
     const requi = this;
+    if(requi.isModified('archivo')) return next();
     requi.solicitante.validacion = v4();
     const date = new Date();
     verifyContent(date.getFullYear());
