@@ -21,3 +21,9 @@ export const requis  = async(req: Request, res: Response): Promise<Response> => 
 
     return res.status(200).json({message: 'Consulta exitosa.', data: requis});
 }
+
+export const uploadFile = async (req: Request, res: Response): Promise<Response> => {
+    
+
+    return res.status(200).json({message: 'Archivo subido con exito.', data: ""});
+}
