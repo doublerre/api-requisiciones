@@ -35,3 +35,8 @@ export const deleteRequi = async (req: Request, res: Response): Promise<Response
     if(!requi) return res.status(404).json({message: "No se encontro la requisición a eliminar"});
     return res.status(200).json({message: "Requisición eliminada correctamente.", data: requi});
 }
+
+export const updateRequi = async(req: Request, res: Response): Promise<Response> => {
+    const requiUpdated = await Requi.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    return res.status(200).json({message: 'Requisición actualizada con exito', data: requiUpdated});
+}
