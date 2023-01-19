@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import path from "path";
 
 import authRoutes from "./routes/auth.routes";
 import requiRoutes from "./routes/requi.routes";
@@ -32,6 +33,8 @@ app.get('/', (req, res) => {
         documentacion: 'Pendiente.'
     });
 });
+
+app.use('/uploads', express.static(path.resolve('uploads')));
 
 app.use('/api', authRoutes);
 app.use('/api', requiRoutes);

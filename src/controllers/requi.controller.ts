@@ -23,7 +23,9 @@ export const requis  = async(req: Request, res: Response): Promise<Response> => 
 }
 
 export const uploadFile = async (req: Request, res: Response): Promise<Response> => {
-    
-
-    return res.status(200).json({message: 'Archivo subido con exito.', data: ""});
+    const requi = await Requi.findById(req.params.id);
+    if(!requi) return res.status(404).json({message: "Error, no se encontro la requisición"});
+    requi.archivo = req.file!.path;
+    const requiUpdated = await requi.save();
+    return res.status(200).json({message: 'Archivo subido con exito.', data: requiUpdated});
 }
