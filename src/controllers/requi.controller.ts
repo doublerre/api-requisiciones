@@ -29,3 +29,9 @@ export const uploadFile = async (req: Request, res: Response): Promise<Response>
     const requiUpdated = await requi.save();
     return res.status(200).json({message: 'Archivo subido con exito.', data: requiUpdated});
 }
+
+export const deleteRequi = async (req: Request, res: Response): Promise<Response> => {
+    const requi = await Requi.findByIdAndDelete(req.params.id);
+    if(!requi) return res.status(404).json({message: "No se encontro la requisición a eliminar"});
+    return res.status(200).json({message: "Requisición eliminada correctamente.", data: requi});
+}
