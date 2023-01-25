@@ -5,7 +5,7 @@ export const verifyRoles = (role: string) => {
     return (req: Request, res: Response, next: NextFunction) =>{
         const user_role = req.user.role;
 
-        if(role === user_role){
+        if(role === user_role || user_role === "admin"){
             next()
             return;
         }
