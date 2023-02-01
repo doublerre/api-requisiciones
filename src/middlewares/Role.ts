@@ -3,7 +3,7 @@ import User, {IUser} from "../models/User";
 
 export const verifyRoles = (role: string) => {
     return (req: Request, res: Response, next: NextFunction) =>{
-        const user_role = req.user.role;
+        const user_role = req.user.rol;
 
         if(role === user_role || user_role === "admin"){
             next()
