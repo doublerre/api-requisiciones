@@ -7,6 +7,8 @@ export interface IRequi extends Document{
     folio: string,
     archivo: string,
     prioridad: string,
+    presupuesto_val: boolean,
+    proveedor_val: boolean,
     comentarios: [{
         comentario: string,
         user: Array<ObjectId>
@@ -29,6 +31,8 @@ const RequiSchema: Schema<IRequi> = new Schema({
     folio: String,
     archivo: String,
     prioridad: {type: String, required: true, enum: ['Baja', 'Media', 'Alta'], default: 'Baja'},
+    presupuesto_val: Boolean,
+    proveedor_val: Boolean,
     comentarios: [{
         comentario: String,
         user: [{
