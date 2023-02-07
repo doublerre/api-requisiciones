@@ -43,17 +43,19 @@ export const updateRequi = async(req: Request, res: Response): Promise<Response>
 
 export const valRequi = async(req: Request, res: Response): Promise<Response> => {
     const requi = await Requi.findById(req.params.id);
-    if(req.body.presupuesto_val === false || req.body.proveedor_val === false){
-        requi!.estatus = "Rechzado";
-        const new_requi = await requi!.save()
-        return res.json({message: 'Requisición rechazada.', data: new_requi});
-    }
     const requiUpdated = await Requi.findByIdAndUpdate(req.params.id, req.body, {new: true});
-    if(requiUpdated!.presupuesto_val === true || requiUpdated!.proveedor_val === true){
-        requi!.estatus = "Aprobado";
-    }
     if(!requi) return res.status(404).json({message: 'No se encontro la requisición con este id'});
-    return res.json({message: 'Requisición actualizada.'});
+    if(req.body.presupuesto_val === false || req.body.proveedor_val === false){
+        requi!.estatus = "Rechazado";
+        const new_requi = await requi!.save()
+        return res.json({message: 'Requisición rechazada.', data: requiUpdated});
+    }
+    if(requiUpdated!.presupuesto_val === true && requiUpdated!.proveedor_val === true){
+        requi!.estatus = "Aprobado";
+        const aceptedRequi = await requi!.save();
+        return res.json({message: "Requisición aceptada.", data: aceptedRequi});
+    }
+    return res.json({message: 'Requisición actualizada.', data: requiUpdated}); 
 }
 
 const validate = async(request: any, requi: any) => {

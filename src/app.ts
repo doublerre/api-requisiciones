@@ -8,6 +8,7 @@ import path from "path";
 import authRoutes from "./routes/auth.routes";
 import requiRoutes from "./routes/requi.routes";
 import presupuestoRoutes from "./routes/r_presupuesto.routes";
+import proveedorRoutes from "./routes/r_proveedor.routes";
 
 const app = express();
 const limiter = rateLimit({
@@ -40,5 +41,6 @@ app.use('/uploads', express.static(path.resolve('uploads')));
 app.use('/api', authRoutes);
 app.use('/api', requiRoutes);
 app.use('/api', presupuestoRoutes);
+app.use('/api', proveedorRoutes);
 
 export default app;
