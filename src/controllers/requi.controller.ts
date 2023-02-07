@@ -57,7 +57,3 @@ export const valRequi = async(req: Request, res: Response): Promise<Response> =>
     }
     return res.json({message: 'Requisición actualizada.', data: requiUpdated}); 
 }
-
-const validate = async(request: any, requi: any) => {
-    
-}
