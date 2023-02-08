@@ -12,3 +12,11 @@ export const verifyRoles = (role: string) => {
         res.status(401).json({message: "Error, no tienes los permisos suficientes para acceder a este contenido"});
     }
 }
+
+export const checkDuplicateUsername = async (req: Request, res: Response, next: NextFunction) => {
+    const user = await User.findOne({username: req.body.username})
+    
+    if (user) return res.status(400).json({message: 'Ya existe este usuario.'});
+
+    next();
+}

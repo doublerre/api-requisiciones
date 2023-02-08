@@ -10,6 +10,7 @@ import requiRoutes from "./routes/requi.routes";
 import presupuestoRoutes from "./routes/r_presupuesto.routes";
 import proveedorRoutes from "./routes/r_proveedor.routes";
 import dirRoutes from "./routes/dir.routes";
+import adminRoutes from "./routes/admin.routes";
 
 import { createDirs } from "./libs/initialSetup";
 
@@ -48,5 +49,6 @@ app.use('/api', requiRoutes);
 app.use('/api', presupuestoRoutes);
 app.use('/api', proveedorRoutes);
 app.use('/api', dirRoutes);
+app.use('/api', adminRoutes);
 
 export default app;
