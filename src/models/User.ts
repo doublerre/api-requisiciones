@@ -1,4 +1,4 @@
-import {model, Schema, Document} from 'mongoose';
+import {model, Schema, Document, ObjectId} from 'mongoose';
 import bcrypt from 'bcrypt';
 
 /**
@@ -10,6 +10,7 @@ export interface IUser extends Document {
     password: string,
     activo: boolean,
     rol: string,
+    direccion: ObjectId,
     comparePassword: (password: string) => Promise<boolean>
     checkUsername: (username: string) => Promise<boolean>
 }
@@ -23,6 +24,7 @@ const UserSchema: Schema<IUser> = new Schema({
     password: String,
     activo: Boolean,
     rol: {type: String, enum: ['admin', 'r_presupuesto', 'r_proveedor', 'solicitante']},
+    direccion: {ref: "Dir", type: Schema.Types.ObjectId}
 }, {timestamps: true});
 
 UserSchema.pre<IUser>('save', async function(next){
