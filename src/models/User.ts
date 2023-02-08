@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt';
 export interface IUser extends Document {
     nombre: string, 
     username: string,
-    password: string,
+    password?: string,
     activo: boolean,
     rol: string,
     direccion: ObjectId,
@@ -32,7 +32,7 @@ UserSchema.pre<IUser>('save', async function(next){
     if(!user.isModified('password')) return next();
 
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(user.password, salt);
+    const hash = await bcrypt.hash(user.password!, salt);
 
     user.password = hash;
     next();

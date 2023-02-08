@@ -54,6 +54,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
 
     const isMatch = await user.comparePassword(req.body.password);
     if(isMatch){
+        user.password = undefined;
         return res.status(200).json({message: 'Login Correcto', user: user, token: createToken(user)});
     }
 
