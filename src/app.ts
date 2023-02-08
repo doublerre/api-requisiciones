@@ -10,6 +10,8 @@ import requiRoutes from "./routes/requi.routes";
 import presupuestoRoutes from "./routes/r_presupuesto.routes";
 import proveedorRoutes from "./routes/r_proveedor.routes";
 
+import { createDirs } from "./libs/initialSetup";
+
 const app = express();
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -17,6 +19,8 @@ const limiter = rateLimit({
     legacyHeaders: false,
     message: "Too many request from this IP, please try again after an hour"
 });
+
+createDirs();
 
 app.set('port', process.env.PORT || 8000);
 
