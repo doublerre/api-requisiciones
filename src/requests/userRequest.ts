@@ -1,5 +1,6 @@
 import Joi from "joi";
 import {Request, Response, NextFunction} from 'express';
+import { validateRequest } from "../middlewares/validateRequest";
 
 export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     const schema = Joi.object({
@@ -61,7 +62,8 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
             'any.required': `El campo direccion es requerido.`,
             'string.min': `La direccion debe ser de al menos {#limit} caracteres.`,
         }),
-    })
+    });
+    validateRequest(req, res, next, schema);
 }
 
 /**
@@ -115,23 +117,4 @@ export const changePasswordRequest = async (req: Request, res: Response, next: N
         }),
     });
     validateRequest(req, res, next, schema);
-}
-
-
-const validateRequest = async (req: Request, res: Response, next: NextFunction, schema: any) => {
-    const options = {
-        abortEarly: false,
-        allowUnknown: true,
-        stripUnknown: true,
-    };
-    const {error, value} = schema.validate(req.body, options);
-    if (error) {
-        res.status(422).json({
-            message: 'Error de validación.',
-            error: error.details,
-        });
-    } else {
-        req.body = value;
-        next();
-    }
 }
