@@ -24,7 +24,7 @@ const UserSchema: Schema<IUser> = new Schema({
     password: String,
     activo: Boolean,
     rol: {type: String, enum: ['admin', 'r_presupuesto', 'r_proveedor', 'solicitante']},
-    direccion: {ref: "Dir", type: Schema.Types.ObjectId}
+    direccion: {ref: "Dir", type: Schema.Types.ObjectId, required: true}
 }, {timestamps: true});
 
 UserSchema.pre<IUser>('save', async function(next){
