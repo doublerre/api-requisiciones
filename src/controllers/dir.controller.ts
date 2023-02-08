@@ -5,7 +5,7 @@ export const save = async (req: Request, res: Response): Promise<Response> => {
     const newDir = new Dir(req.body);
     await newDir.save();
 
-    return res.status(201).json({message: "Nueva dirección creada con exito"});
+    return res.status(201).json({message: "Nueva dirección creada con exito", data: newDir});
 }
 
 export const getDirs = async (req: Request, res: Response): Promise<Response> => {
@@ -16,7 +16,7 @@ export const getDirs = async (req: Request, res: Response): Promise<Response> =>
 
 export const updateDir = async (req: Request, res: Response): Promise<Response> => {
     const updateDir = await Dir.findByIdAndUpdate(req.params.id, req.body, {new: true});
-    return res.json({message: "Dirección actualizada con exito"});
+    return res.json({message: "Dirección actualizada con exito", data: updateDir});
 }
 
 export const deleteDir = async (req: Request, res: Response): Promise<Response> => {
