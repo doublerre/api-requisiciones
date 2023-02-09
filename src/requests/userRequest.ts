@@ -72,7 +72,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
  * @param res 
  * @param next 
  */
-export const updateProfileRequest = async (req: Request, res: Response, next: NextFunction) => {
+export const updateUserRequest = async (req: Request, res: Response, next: NextFunction) => {
     const schema = Joi.object({
         nombre: Joi.string().optional().min(1).messages({
             'string.base': `El campo nombre debe ser una cadena de texto.'`,
@@ -83,6 +83,16 @@ export const updateProfileRequest = async (req: Request, res: Response, next: Ne
             'string.base': `El campo username debe ser una cadena de texto.'`,
             'string.empty': `El campo username no debe estar vacio.`,
             'string.min': `El username debe de ser de al menos {#limit} caracter.`,
+        }),
+        rol: Joi.string().optional().min(1).messages({
+            'string.base': `El campo rol debe ser una cadena de texto.'`,
+            'string.empty': `El campo rol no debe estar vacio.`,
+            'string.min': `El rol debe de ser de al menos {#limit} caracter.`,
+        }),
+        direccion: Joi.string().optional().min(1).messages({
+            'string.base': `El campo direccion debe ser una cadena de texto.'`,
+            'string.empty': `El campo direccion no debe estar vacio.`,
+            'string.min': `El direccion debe de ser de al menos {#limit} caracter.`,
         }),
     });
     validateRequest(req, res, next, schema);

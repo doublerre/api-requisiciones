@@ -71,12 +71,10 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
  * @returns 
  */
 
-export const updateProfile = async (req: Request, res: Response): Promise<Response> => {
-    const {nombre, username, email, acerca_de} = req.body;
-
-    const userUpdated = await User.findByIdAndUpdate(req.userId, {nombre, username, email, acerca_de}, {new: true}).select('-password');
+export const updateUser = async (req: Request, res: Response): Promise<Response> => {
+    const userUpdated = await User.findByIdAndUpdate(req.params.id, req.body, {new: true}).select('-password');
     return res.status(200).json({message: 'Perfil actualizado correctamente.', data: userUpdated});
-}
+} 
 
 /**
  * * Método que retorna los datos del usuario logueado.
