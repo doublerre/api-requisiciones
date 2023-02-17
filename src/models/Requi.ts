@@ -23,7 +23,8 @@ export interface IRequi extends Document{
         validacion: string,
         user: Array<ObjectId>
     },
-    estatus: string
+    estatus: string,
+    createdAt: string
 }
 
 const RequiSchema: Schema<IRequi> = new Schema({
