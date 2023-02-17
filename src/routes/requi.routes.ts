@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import {deleteRequi, getRequi, save, updateRequi, uploadFile} from '../controllers/requi.controller';
+import {createPDFRequi} from '../controllers/pdfKit.controller'
 import { TokenValidation } from "../middlewares/verifyToken";
 
 import multer from '../libs/multer';
@@ -13,5 +14,6 @@ router.put('/requi/file/:id', [TokenValidation, verifyRoles("solicitante")], mul
 router.delete('/requi/:id', [TokenValidation, verifyRoles("solicitante")], deleteRequi);
 router.put('requi/:id', [TokenValidation, verifyRoles("solicitante")], updateRequi);
 router.get('/requi/:id', [TokenValidation], getRequi);
+router.get('/pdf/create-requi/:id', [TokenValidation], createPDFRequi);
 
 export default router;
