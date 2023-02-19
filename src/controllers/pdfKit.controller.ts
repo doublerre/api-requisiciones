@@ -9,7 +9,8 @@ import Requi from '../models/Requi';
 export const createPDFRequi = async(req: Request, res: Response): Promise<Response> => {
     const requi = await Requi.findById(req.params.id).populate('solicitante.user');
     if(!requi) return res.status(404).json({message: "No se encontraron resultados"});
-    //if(requi.proveedor_val !== true || requi.presupuesto_val !== true) return res.status(400).json({message: "La requisicion no es valida"});
+    if(requi.pdf) return res.status(400).json({message: "Ya existe un PDF para esta requisicion"});
+    if(requi.proveedor_val !== true || requi.presupuesto_val !== true) return res.status(400).json({message: "La requisicion no es valida"});
     const date = convertISODate(requi!.createdAt);
     const productosTable = {
         headers: [
