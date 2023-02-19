@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import {deleteRequi, getRequi, save, updateRequi, uploadFile} from '../controllers/requi.controller';
-import {createPDFRequi} from '../controllers/pdfKit.controller'
+import { createPDFRequi } from '../controllers/pdfKit.controller'
 import { TokenValidation } from "../middlewares/verifyToken";
 
 import multer from '../libs/multer';

@@ -6,6 +6,7 @@ export interface IRequi extends Document{
     solicita: string,
     folio: string,
     archivo: string,
+    pdf: string,
     prioridad: string,
     presupuesto_val: boolean,
     proveedor_val: boolean,
@@ -21,7 +22,7 @@ export interface IRequi extends Document{
     }],
     solicitante: {
         validacion: string,
-        user: Array<ObjectId>
+        user: any
     },
     estatus: string,
     createdAt: string
@@ -31,6 +32,7 @@ const RequiSchema: Schema<IRequi> = new Schema({
     solicita: {type: String, required: true},
     folio: String,
     archivo: String,
+    pdf: String,
     prioridad: {type: String, required: true, enum: ['Baja', 'Media', 'Alta'], default: 'Baja'},
     presupuesto_val: Boolean,
     proveedor_val: Boolean,
@@ -45,7 +47,6 @@ const RequiSchema: Schema<IRequi> = new Schema({
         cantidad: {type: String, required: true},
         unidad: {type: String, required: true},
         descripcion: {type: String, required: true},
-        administracion: String,
     }],
     solicitante: {
         validacion: String,
@@ -60,6 +61,7 @@ const RequiSchema: Schema<IRequi> = new Schema({
 RequiSchema.pre<IRequi>('save', async function(next) {
     const requi = this;
     //if(requi.estatus) return next();
+    if(requi.pdf) return next();
     if(requi.isModified('archivo')) return next();
     requi.solicitante.validacion = v4();
     const date = new Date();

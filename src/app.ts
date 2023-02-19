@@ -42,7 +42,9 @@ app.get('/', (req, res) => {
     });
 });
 
+//Rutas estaticas
 app.use('/uploads', express.static(path.resolve('uploads')));
+app.use('/pdf', express.static(path.resolve('pdf')));
 
 app.use('/api', authRoutes);
 app.use('/api', requiRoutes);

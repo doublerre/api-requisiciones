@@ -48,4 +48,8 @@ UserSchema.methods.checkUsername = async function (username: string): Promise<bo
     return false;
 }
 
+UserSchema.pre<IUser>('find', async function(next){
+    this.populate('direccion');
+})
+
 export default model<IUser>('User', UserSchema);
