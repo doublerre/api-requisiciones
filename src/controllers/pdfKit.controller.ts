@@ -67,7 +67,7 @@ export const createPDFRequi = async(req: Request, res: Response): Promise<Respon
     doc.moveDown();
     doc.table(firmasTable);
     doc.moveDown();
-    doc.font('Helvetica-Bold').fontSize(8).text('Nota: La adquisición del material o contratación del servicio queda sujeta a las condiciones presupuestales', {align: 'center'});
+    doc.font('Helvetica-Bold').fontSize(8).text('Nota: La adquisición del material o contratación del servicio queda sujeta a las condiciones presupuestales.', {align: 'center'});
     const filename = pathFilename();
     doc.pipe(fs.createWriteStream(filename));
     doc.end();
