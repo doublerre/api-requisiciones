@@ -3,19 +3,22 @@ version: '3'
 services:
     web:
         container_name: requi_api
+        depends_on: db-requisiciones
         restart: always
         build: .
         ports:
             - "8000:8000"
+        expose: "8000"
         links:
-            - mongodb
+            - db-requisiciones
         volumes:
             - /usr/src/app/node_modules
             - .:/usr/src/app
-    mongodb: 
+    db-requisiciones: 
         container_name: db-requisiciones
         image: mongo
         ports:
             - "27017:27017"
+        expose: "27017"
         logging:
             driver: none
