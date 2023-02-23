@@ -6,7 +6,8 @@ services:
         image: mongo
         ports:
             - "27017:27017"
-        expose: "27017"
+        expose:
+            - "27017"
         logging:
             driver: none
     web:
@@ -16,7 +17,8 @@ services:
         build: .
         ports:
             - "8000:8000"
-        expose: "8000"
+        expose:
+            - "8000"
         links:
             - db-requisiciones
         volumes:
