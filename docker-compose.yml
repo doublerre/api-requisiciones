@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+    db-requisiciones: 
+        container_name: db-requisiciones
+        image: mongo
+        ports:
+            - "27017:27017"
+        expose: "27017"
+        logging:
+            driver: none
     web:
         container_name: requi_api
         depends_on: db-requisiciones
@@ -14,11 +22,3 @@ services:
         volumes:
             - /usr/src/app/node_modules
             - .:/usr/src/app
-    db-requisiciones: 
-        container_name: db-requisiciones
-        image: mongo
-        ports:
-            - "27017:27017"
-        expose: "27017"
-        logging:
-            driver: none
