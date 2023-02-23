@@ -56,7 +56,7 @@ export const valRequi = async(req: Request, res: Response): Promise<Response> =>
         return res.json({message: 'Requisición rechazada.', data: requiReject});
     }
     if(requiUpdated!.presupuesto_val === true && requiUpdated!.proveedor_val === true){
-        const requiAcepted = await Requi.findByIdAndUpdate(req.params.id, {estatus: "Rechazado"}, {new: true});
+        const requiAcepted = await Requi.findByIdAndUpdate(req.params.id, {estatus: "Aprobado"}, {new: true});
         return res.json({message: "Requisición aceptada.", data: requiAcepted});
     }
     return res.json({message: 'Requisición actualizada.', data: requiUpdated}); 
