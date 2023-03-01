@@ -8,6 +8,6 @@ dotenvExpand.expand(config);
 export default {
     jwtSecret: process.env.JWT_SECRET || 'YOUR JWT SECRET HERE',
     DB: {
-        URI: process.env.MONGODB_URI || 'YOUR MONGODB URI HERE',
+        URI: process.env.MONGODB_URI || 'mongodb://db-requisiciones:27017/requisiciones',
     }
 }
