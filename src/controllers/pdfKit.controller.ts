@@ -35,7 +35,7 @@ export const createPDFRequi = async(req: Request, res: Response): Promise<Respon
     const firmasTable = {
         headers: [
             {label: `\n \n${toUperCase(requi!.solicitante.user.nombre)} \n${toUperCase(requi!.solicitante.user.direccion.name)} \n${requi!.solicitante.validacion} \n \n \n`, property: "solicita", align: "center", headerAlign: "center"},
-            {label: "\n \nDR. HAMURABI GAMBOA ROSALES", property: "autoriza", align: "center", headerAlign: "center"},
+            {label: "\n \n", property: "autoriza", align: "center", headerAlign: "center"},
             {label: "\n \nMTRO. EFRAIN ESPARZA MONTALVO", property: "vb", align: "center", headerAlign: "center"},
         ],
         datas: [

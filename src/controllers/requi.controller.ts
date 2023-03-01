@@ -22,6 +22,12 @@ export const requis  = async(req: Request, res: Response): Promise<Response> => 
     return res.status(200).json({message: 'Consulta exitosa.', data: requis});
 }
 
+export const solicitudesRequis =async (req: Request, res: Response): Promise<Response> => {
+    const requis = await Requi.find({estatus: "Revision"}).populate("solicitante.user");
+    if(!requis) return res.status(404).json({message: "No se encontradon datos en la base de datos"});
+    return res.json({message: "Consulta exitosa.", data: requis});
+}
+
 export const getRequi = async(req: Request, res: Response): Promise<Response> => {
     const requi = await Requi.findById(req.params.id).populate('solicitante.user');
     if(!requi) return res.status(404).json({message: 'No se han encontrado requisiciones.'});
