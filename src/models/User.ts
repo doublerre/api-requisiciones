@@ -6,13 +6,13 @@ import bcrypt from 'bcrypt';
  */
 export interface IUser extends Document {
     nombre: string, 
-    username: string,
+    email: string,
     password?: string,
     activo: boolean,
     rol: string,
     direccion: ObjectId,
     comparePassword: (password: string) => Promise<boolean>
-    checkUsername: (username: string) => Promise<boolean>
+    checkEmail: (email: string) => Promise<boolean>
 }
 
 /**
@@ -20,7 +20,7 @@ export interface IUser extends Document {
  */
 const UserSchema: Schema<IUser> = new Schema({
     nombre: {type: String, required: true},
-    username: { type: String, unique: true, required: true },
+    email: { type: String, unique: true, required: true },
     password: String,
     activo: Boolean,
     rol: {type: String, enum: ['admin', 'r_presupuesto', 'r_proveedor', 'solicitante']},
@@ -42,8 +42,8 @@ UserSchema.methods.comparePassword = async function (password: string): Promise<
     return await bcrypt.compare(password, this.password).catch((e) => false);
 }
 
-UserSchema.methods.checkUsername = async function (username: string): Promise<boolean> {
-    const user = await this.findOne({username: username});
+UserSchema.methods.checkEmail = async function (email: string): Promise<boolean> {
+    const user = await this.findOne({email: email});
     if(user) return true;
     return false;
 }

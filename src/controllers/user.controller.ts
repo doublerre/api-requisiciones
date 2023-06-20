@@ -15,9 +15,9 @@ import moment from 'moment';
  */
 function createToken(user: IUser){
     return jwt.sign({
-        sub: user._id,
+        id: user._id,
         iat: moment().unix(),
-        exp: moment().add(30, 'days').unix(),},
+        exp: moment().add(70, 'days').unix(),},
         config.jwtSecret
     );
 }

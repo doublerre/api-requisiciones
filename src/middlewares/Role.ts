@@ -23,8 +23,8 @@ export const checkDuplicateUsername = async (req: Request, res: Response, next: 
 
 export const checkUpdateUsername = async (req: Request, res: Response, next: NextFunction) =>  {
     const user = await User.findById(req.params.id);
-    if(user!.username != req.body.username){
-        const validateUsername = await User.findOne({username: req.body.username});
+    if(user!.email != req.body.email){
+        const validateUsername = await User.findOne({email: req.body.email});
         if(validateUsername) return res.status(400).json({message: 'Ya existe este usuario.'});
     }
     next();

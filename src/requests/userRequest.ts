@@ -4,7 +4,7 @@ import { validateRequest } from "../middlewares/validateRequest";
 
 export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     const schema = Joi.object({
-        username: Joi.string().required().messages({
+        email: Joi.string().required().messages({
             'string.base': `El campo username debe ser una cadena de texto.'`,
             'string.empty': `El campo username no debe estar vacio.`,
             'any.required': `El campo username es requerido.`,
@@ -28,7 +28,7 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
             'any.required': `El campo nombre es requerido.`,
             'string.min': `La nombre debe ser de al menos {#limit} caracteres.`,
         }),
-        username: Joi.string().required().messages({
+        email: Joi.string().required().messages({
             'string.base': `El campo username debe ser una cadena de texto.'`,
             'string.empty': `El campo username no debe estar vacio.`,
             'any.required': `El campo username es requerido.`,
@@ -79,7 +79,7 @@ export const updateUserRequest = async (req: Request, res: Response, next: NextF
             'string.empty': `El campo nombre no debe estar vacio.`,
             'string.min': `El nombre debe de ser de al menos {#limit} caracter.`,
         }),
-        username: Joi.string().optional().min(1).messages({
+        email: Joi.string().optional().min(1).messages({
             'string.base': `El campo username debe ser una cadena de texto.'`,
             'string.empty': `El campo username no debe estar vacio.`,
             'string.min': `El username debe de ser de al menos {#limit} caracter.`,
